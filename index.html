@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คุณบาส CarCash - ผู้เชี่ยวชาญรับซื้อรถยนต์มือสอง ประสบการณ์ 10 ปี</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: Kanit for Thai & Urbanist for Numbers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Urbanist:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Kanit', 'sans-serif'],
+                        num: ['Urbanist', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            gold: '#f59e0b',
+                            goldHover: '#d97706',
+                            darkBg: '#090d16',
+                            cardBg: '#111827',
+                            border: '#1f2937',
+                            lineGreen: '#06c755'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-glow {
+            box-shadow: 0 0 80px -10px rgba(245, 158, 11, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-brand-darkBg text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-black">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-brand-darkBg/95 backdrop-blur-md border-b border-brand-border">
+        <div class="max-w-6xl mx-auto px-4 h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-brand-gold rounded-xl flex items-center justify-center text-brand-darkBg font-black text-xl font-num">
+                    CC
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-wide block">CarCash</span>
+                    <span class="text-xs text-brand-gold -mt-1 block">by อดีต Top Sales</span>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation Links (Hidden on mobile) -->
+            <nav class="hidden md:flex gap-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-brand-gold transition-colors">ประวัติผู้เชี่ยวชาญ</a>
+                <a href="#why-me" class="hover:text-brand-gold transition-colors">ทำไมต้องขายกับผม</a>
+                <a href="#estimator" class="hover:text-brand-gold transition-colors">ประเมินราคาออนไลน์</a>
+                <a href="#reviews" class="hover:text-brand-gold transition-colors">รีวิวผลงาน</a>
+            </nav>
+
+            <!-- Call-to-Action button (Desktop) -->
+            <div class="hidden md:block">
+                <a href="#estimator" class="bg-brand-gold hover:bg-brand-goldHover text-brand-darkBg px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 shadow-lg shadow-brand-gold/10 hover:shadow-brand-gold/25 block">
+                    ประเมินราคาทันที
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <div class="md:hidden">
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="text-slate-100 hover:text-brand-gold focus:outline-none p-2" aria-label="เปิดเมนูนำทาง" style="min-width: 44px; min-height: 44px;">
+                    <i id="menuIcon" class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Container (Slide down) -->
+        <div id="mobileMenu" class="hidden md:hidden bg-brand-cardBg border-b border-brand-border absolute left-0 w-full transition-all duration-300 ease-in-out">
+            <nav class="flex flex-col px-6 py-6 gap-5 text-base font-medium text-slate-300">
+                <a href="#about" onclick="toggleMobileMenu()" class="hover:text-brand-gold py-2 border-b border-slate-800 transition-colors">ประวัติผู้เชี่ยวชาญ</a>
+                <a href="#why-me" onclick="toggleMobileMenu()" class="hover:text-brand-gold py-2 border-b border-slate-800 transition-colors">ทำไมต้องขายกับผม</a>
+                <a href="#estimator" onclick="toggleMobileMenu()" class="hover:text-brand-gold py-2 border-b border-slate-800 transition-colors">ประเมินราคาออนไลน์</a>
+                <a href="#reviews" onclick="toggleMobileMenu()" class="hover:text-brand-gold py-2 border-b border-slate-800 transition-colors">รีวิวผลงาน</a>
+                <a href="#estimator" onclick="toggleMobileMenu()" class="bg-brand-gold hover:bg-brand-goldHover text-brand-darkBg py-3 rounded-xl font-bold text-center mt-2 transition-all block">
+                    เริ่มประเมินราคารถทันที
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-12 pb-24 overflow-hidden border-b border-brand-border hero-glow">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left Content -->
+            <div class="lg:col-span-7 flex flex-col justify-center text-center lg:text-left z-10">
+                <div class="inline-flex items-center gap-2 bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-sm px-4 py-1.5 rounded-full font-medium mb-6 mx-auto lg:mx-0 w-fit">
+                    <i class="fa-solid fa-award"></i> การันตีความน่าเชื่อถือ อดีต Top Sales แบรนด์หรู
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                    ขายรถยนต์มือสองให้ได้ <br>
+                    <span class="text-gradient">ราคาดีที่สุด และปลอดภัยที่สุด</span>
+                </h1>
+                <p class="text-lg text-slate-300 mb-8 max-w-xl mx-auto lg:mx-0">
+                    สวัสดีครับผม <strong class="text-white">"คุณบาส"</strong> ผู้มีประสบการณ์ประเมินและซื้อขายรถยนต์มากว่า 10 ปี ผมพร้อมดูแลคุณทุกขั้นตอน ไม่ผ่านนายหน้า ได้เงินสดทันที มีเอกสารถูกต้องตามกฎหมาย 100%
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                    <a href="#estimator" class="w-full sm:w-auto bg-brand-gold hover:bg-brand-goldHover text-brand-darkBg px-8 py-4 rounded-2xl font-bold text-lg transition-all text-center flex items-center justify-center gap-2 shadow-xl shadow-brand-gold/20" style="min-height: 48px;">
+                        <i class="fa-solid fa-calculator"></i> ประเมินราคารถตอนนี้
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all text-center flex items-center justify-center gap-2 border border-brand-border" style="min-height: 48px;">
+                        <i class="fa-brands fa-line text-brand-lineGreen text-xl"></i> แอดไลน์พูดคุยโดยตรง
+                    </a>
+                </div>
+
+                <!-- Trust Stats -->
+                <div class="grid grid-cols-3 gap-6 mt-12 pt-10 border-t border-brand-border/60">
+                    <div class="text-center lg:text-left">
+                        <span class="block text-3xl font-bold text-white font-num">10+ <span class="text-brand-gold text-xl">ปี</span></span>
+                        <span class="text-xs text-slate-400 mt-1 block">ประสบการณ์ในวงการ</span>
+                    </div>
+                    <div class="text-center lg:text-left">
+                        <span class="block text-3xl font-bold text-white font-num">5,000+ <span class="text-brand-gold text-xl">คัน</span></span>
+                        <span class="text-xs text-slate-400 mt-1 block">ตรวจสภาพรถสะสม</span>
+                    </div>
+                    <div class="text-center lg:text-left">
+                        <span class="block text-3xl font-bold text-white font-num">100% <span class="text-brand-gold text-xl">ปลอดภัย</span></span>
+                        <span class="text-xs text-slate-400 mt-1 block">โอนกรรมสิทธิ์ถูกต้อง</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Profile Card -->
+            <div class="lg:col-span-5 flex justify-center relative">
+                <div class="absolute inset-0 bg-brand-gold/10 blur-3xl rounded-full scale-75 -z-10"></div>
+                <div class="relative w-72 h-96 sm:w-80 sm:h-[420px] rounded-3xl overflow-hidden border-2 border-brand-gold/40 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop" alt="คุณบาส - ผู้เชี่ยวชาญรถยนต์มือสอง" class="w-full h-full object-cover">
+                    <div class="absolute bottom-6 left-6 right-6 bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-brand-border text-center">
+                        <span class="text-brand-gold font-bold text-sm block">คุณวิทวัส (บาส)</span>
+                        <span class="text-xs text-slate-300 mt-0.5 block">อดีต Top Sales โชว์รูมรถยนต์หรูชั้นนำ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Personal Story & Expertise -->
+    <section id="about" class="py-24 border-b border-brand-border bg-slate-900/40">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold mb-4 text-white">ถอดประสบการณ์ <span class="text-brand-gold">10 ปี</span> ในวงการรถยนต์</h2>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mb-6"></div>
+                <p class="text-slate-300">ความน่าเชื่อถือคือสิ่งสำคัญที่สุดในการซื้อขายรถ ผมจึงยึดมั่นความซื่อสัตย์และการทำงานที่เป็นระบบเป็นอันดับแรก</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-brand-cardBg border border-brand-border p-8 rounded-2xl hover:border-brand-gold/40 transition-all duration-300">
+                    <div class="w-12 h-12 bg-brand-gold/10 text-brand-gold rounded-xl flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-medal"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">อดีต Top Sales รถยนต์หรู</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        จากการทำงานคลุกคลีในโชว์รูมแบรนด์ยุโรปชั้นนำ ทำให้ผมเข้าใจมูลค่าที่แท้จริงของรถยนต์ ตรวจเช็กจุดคุ้มค่า และช่วยเพิ่มราคาให้ลูกค้าได้สูงสุดเท่าที่จะทำได้
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-brand-cardBg border border-brand-border p-8 rounded-2xl hover:border-brand-gold/40 transition-all duration-300">
+                    <div class="w-12 h-12 bg-brand-gold/10 text-brand-gold rounded-xl flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">ตรวจสภาพประเมินราคาแม่นยำ</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        ผมผ่านการอบรมรับรองมาตรฐานการประเมินสภาพรถยนต์ระดับสากล วิเคราะห์ประวัติรถได้ละเอียด ลูกค้าจึงมั่นใจได้ว่าจะได้รับการเสนอราคาที่เป็นกลาง ยุติธรรม และไม่มีการกดราคาหน้างาน
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-brand-cardBg border border-brand-border p-8 rounded-2xl hover:border-brand-gold/40 transition-all duration-300">
+                    <div class="w-12 h-12 bg-brand-gold/10 text-brand-gold rounded-xl flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">ซื้อขายจบงานง่ายใน 1 ชม.</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        ผมมีทีมไฟแนนซ์และทีมงานคอยจัดการเรื่องเอกสาร สัญญา และการโอนกรรมสิทธิ์รถยนต์ทั้งหมดให้คุณแบบเบ็ดเสร็จ สะดวกรวดเร็ว นัดวันเซ็นเอกสารและรับเงินได้ทันที
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Why Choose Me -->
+    <section id="why-me" class="py-24 border-b border-brand-border">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <!-- Left Side Image -->
+            <div class="relative rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[450px]">
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=800&auto=format&fit=crop" alt="Premium luxury car" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-darkBg via-transparent to-transparent"></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                    <p class="text-brand-gold font-bold text-lg mb-2">มั่นใจและโปร่งใสสูงสุด</p>
+                    <p class="text-white text-xl">"ขายรถกับมืออาชีพ สบายใจกว่า ไม่ต้องลุ้นราคา"</p>
+                </div>
+            </div>
+
+            <!-- Right Side Points -->
+            <div>
+                <h2 class="text-3xl font-bold mb-6 text-white">ความสะดวกสบายที่คุณจะได้รับ <br>เมื่อขายรถยนต์กับ <span class="text-brand-gold">คุณบาส</span></h2>
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center text-sm font-bold mt-1">1</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">บริการประเมินราคาถึงบ้านฟรี</h4>
+                            <p class="text-slate-400 text-sm mt-1">บริการเดินทางไปดูสภาพรถจริงและปิดสัญญาถึงหน้าบ้านท่าน ครอบคลุมกรุงเทพฯ และปริมณฑล ไม่คิดค่าใช้จ่ายเพิ่มใดๆ ทั้งสิ้น</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center text-sm font-bold mt-1">2</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">ปลอดภัย ได้รับเงินสดทันที</h4>
+                            <p class="text-slate-400 text-sm mt-1">ชำระเงินสดเต็มจำนวน หรือโอนเงินเข้าบัญชีของคุณทันทีเมื่อเซ็นเอกสารสัญญาซื้อขายเรียบร้อย ปลอดภัย ไร้กังวลเรื่องโดนโกง</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center text-sm font-bold mt-1">3</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">ปิดบัญชีไฟแนนซ์ / ไถ่ถอนรถยึด</h4>
+                            <p class="text-slate-400 text-sm mt-1">กรณีรถยนต์ยังผ่อนไม่หมด หรือติดภาระไฟแนนซ์ค้างชำระ ผมบริการปิดบัญชีและปิดสัญญาไฟแนนซ์ให้เรียบร้อยอย่างถูกต้องตามระบบ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Interactive Valuation Tool -->
+    <section id="estimator" class="py-24 border-b border-brand-border bg-slate-900/60 relative">
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs uppercase text-brand-gold font-bold tracking-widest block mb-2">Interactive Tool</span>
+                <h2 class="text-3xl font-bold mb-4 text-white">ระบบช่วยคำนวณและประเมินราคารถเบื้องต้น</h2>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mb-4"></div>
+                <p class="text-slate-300">กรอกข้อมูลรถยนต์ของคุณด้านล่าง เพื่อประเมินช่วงราคาเบื้องต้น และกดส่งข้อมูลคุยกับคุณบาสต่อผ่าน LINE ได้ทันที</p>
+            </div>
+
+            <!-- Interactive Card -->
+            <div class="bg-brand-cardBg border-2 border-brand-border rounded-3xl p-6 sm:p-10 shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Brand Input -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">ยี่ห้อรถยนต์</label>
+                        <select id="carBrand" class="w-full bg-brand-darkBg border border-brand-border rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-brand-gold" style="min-height: 48px;">
+                            <option value="Toyota">Toyota (โตโยต้า)</option>
+                            <option value="Honda">Honda (ฮอนด้า)</option>
+                            <option value="Mazda">Mazda (มาสด้า)</option>
+                            <option value="Isuzu">Isuzu (อีซูซุ)</option>
+                            <option value="Nissan">Nissan (นิสสัน)</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz (เบนซ์)</option>
+                            <option value="BMW">BMW (บีเอ็มดับเบิลยู)</option>
+                            <option value="Other">ยี่ห้ออื่นๆ</option>
+                        </select>
+                    </div>
+
+                    <!-- Year Input -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">ปีจดทะเบียน (พ.ศ.)</label>
+                        <select id="carYear" class="w-full bg-brand-darkBg border border-brand-border rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-brand-gold" style="min-height: 48px;">
+                            <option value="2566 (2023)">2566 (2023)</option>
+                            <option value="2565 (2022)">2565 (2022)</option>
+                            <option value="2564 (2021)">2564 (2021)</option>
+                            <option value="2563 (2020)">2563 (2020)</option>
+                            <option value="2562 (2019)">2562 (2019)</option>
+                            <option value="2561 (2018)">2561 (2018)</option>
+                            <option value="2560 (2017)">2560 (2017)</option>
+                            <option value="2559 (2016)">2559 (2016)</option>
+                            <option value="2558 (2015)">2558 (2015)</option>
+                            <option value="Older">ก่อนปี 2558 (2015)</option>
+                        </select>
+                    </div>
+
+                    <!-- Model Detail -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">รุ่นและขนาดเครื่องยนต์ (เช่น Civic 1.8 EL / Camry 2.0G)</label>
+                        <input type="text" id="carModel" placeholder="ระบุรุ่นย่อยของคุณ" class="w-full bg-brand-darkBg border border-brand-border rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-brand-gold placeholder:text-slate-600" style="min-height: 48px;">
+                    </div>
+
+                    <!-- Condition Selector -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">สภาพตัวรถเบื้องต้น</label>
+                        <select id="carCondition" class="w-full bg-brand-darkBg border border-brand-border rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-brand-gold" style="min-height: 48px;">
+                            <option value="ดีเยี่ยม (ไม่มีชนหนัก สีเดิมโรงงาน)">ดีเยี่ยม (ไม่มีชนหนัก สีเดิมโรงงาน)</option>
+                            <option value="ดี (ใช้งานทั่วไป ริ้วรอยเล็กน้อย)">ดี (ใช้งานทั่วไป ริ้วรอยเล็กน้อย)</option>
+                            <option value="ปานกลาง (มีริ้วรอยรอบคัน สีต้องเก็บเพิ่มเติม)">ปานกลาง (มีริ้วรอยรอบคัน สีต้องเก็บเพิ่มเติม)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Custom Modal / Result Box in Card -->
+                <div id="resultBox" class="hidden bg-slate-900 border border-brand-gold/30 rounded-2xl p-6 mb-8 text-center animate-pulse">
+                    <h4 class="text-sm uppercase tracking-wider text-brand-gold mb-1 font-bold">ราคาประเมินเบื้องต้นของคุณ</h4>
+                    <span id="estimatedValueText" class="text-3xl font-extrabold text-white font-num">...</span>
+                    <p class="text-xs text-slate-400 mt-2">*ราคานี้เป็นราคาอ้างอิงจากฐานข้อมูลตลาดกลางเฉลี่ยเบื้องต้น กรุณาส่งประเมินจริงเพื่อราคาที่ดีที่สุด</p>
+                </div>
+
+                <!-- Action Button -->
+                <button type="button" onclick="calculateValuation()" class="w-full bg-brand-gold hover:bg-brand-goldHover text-brand-darkBg py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-brand-gold/15 mb-4" style="min-height: 48px;">
+                    คำนวณและเตรียมส่งประเมินราคา
+                </button>
+
+                <!-- Dynamic Line Submit Button -->
+                <a id="lineSubmitBtn" href="#" target="_blank" class="hidden w-full bg-brand-lineGreen hover:bg-opacity-90 text-white py-4 rounded-xl font-bold text-lg transition-all text-center flex items-center justify-center gap-2 shadow-lg" style="min-height: 48px;">
+                    <i class="fa-brands fa-line text-2xl"></i> ส่งประเมินราคาจริงกับคุณบาสผ่าน LINE ทันที
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Reviews -->
+    <section id="reviews" class="py-24 border-b border-brand-border">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold mb-4 text-white">เสียงจากลูกค้าที่ไว้วางใจคุณบาส</h2>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mb-6"></div>
+                <p class="text-slate-300">ความน่าเชื่อถือที่ถูกบอกต่อจากเจ้าของรถจริง ปิดดีลง่าย ได้เงินจริง ปลอดภัยทุกราย</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-brand-cardBg border border-brand-border p-8 rounded-2xl">
+                    <div class="flex items-center gap-1 text-brand-gold mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm italic mb-6">
+                        "ตอนแรกกลัวโดนกดราคามากเพราะถามมาหลายที่ แต่มาเจอกับคุณบาส ตรวจสภาพเป็นระเบียบมาก ชี้จุดประเมินราคาตามตรง และให้ราคาดีกว่าที่อื่นจริงๆ ค่ะ ประทับใจมาก"
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center font-bold text-brand-gold">
+                            พ
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white">คุณพัชราภรณ์ K.</h5>
+                            <span class="text-xs text-slate-500">เจ้าของรถ Toyota Fortuner ปี 2019</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-brand-cardBg border border-brand-border p-8 rounded-2xl">
+                    <div class="flex items-center gap-1 text-brand-gold mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm italic mb-6">
+                        "รถติดไฟแนนซ์ค้างอยู่ 3 งวดไม่รู้จะทำยังไงดีกลัวเครดิตเสียด้วย คุณบาสมาช่วยปิดบัญชีที่ไฟแนนซ์ให้เรียบร้อยเลย มีส่วนต่างเหลือเป็นเงินสดกลับบ้าน สะดวกมากครับ"
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center font-bold text-brand-gold">
+                            ธ
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white">คุณธนกฤต ม.</h5>
+                            <span class="text-xs text-slate-500">เจ้าของรถ Honda Civic ปี 2018</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-brand-cardBg border border-brand-border p-8 rounded-2xl">
+                    <div class="flex items-center gap-1 text-brand-gold mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm italic mb-6">
+                        "คุณบาสให้คำปรึกษาดีมากๆ สุภาพสมกับที่มีประสบการณ์สิบปีจริงๆ ดำเนินเรื่องรวดเร็วเซ็นสัญญาก็โอนเงินสดเข้าบัญชีให้เห็นเลยก่อนส่งรถไป สะดวกสบายไร้กังวลค่ะ"
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center font-bold text-brand-gold">
+                            ส
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white">คุณสุชาดา น.</h5>
+                            <span class="text-xs text-slate-500">เจ้าของรถ Mazda 2 ปี 2021</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Contact & QR Code -->
+    <section id="contact" class="py-24 bg-slate-900/60">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <!-- Left Side Contacts -->
+            <div>
+                <span class="text-brand-gold text-sm font-bold tracking-widest uppercase block mb-2">Contact Me</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-white">แอดไลน์เพื่อรับราคาประเมินรถยนต์ที่ดีที่สุดวันนี้</h2>
+                <p class="text-slate-300 mb-8 leading-relaxed">
+                    เพียงแอดไลน์ส่งข้อมูลรถยนต์กับคุณบาสโดยตรง คุณจะได้รับบริการและการดูแลอย่างเป็นกันเอง ตลอดจนการประเมินราคาที่โปร่งใส ซื่อสัตย์ และให้มูลค่าสูงสุดตามจริง
+                </p>
+                
+                <div class="space-y-4">
+                    <!-- LINE ID Copy Feature -->
+                    <div class="flex items-center gap-4 bg-brand-cardBg border border-brand-border p-4 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-brand-gold text-lg border border-brand-border">
+                            <i class="fa-brands fa-line text-2xl text-brand-lineGreen"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <span class="text-xs text-slate-400 block">LINE Premium ID (444.-/ปี)</span>
+                            <span class="text-lg font-bold text-white" id="lineIdText">@CarCashBas</span>
+                        </div>
+                        <button onclick="copyLineId()" class="bg-slate-800 hover:bg-slate-700 text-brand-gold px-4 py-2 rounded-xl text-xs font-bold transition-all border border-brand-border" style="min-height: 44px;">
+                            คัดลอก ID
+                        </button>
+                    </div>
+
+                    <!-- Phone Direct -->
+                    <div class="flex items-center gap-4 bg-brand-cardBg border border-brand-border p-4 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-brand-gold text-lg border border-brand-border">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">เบอร์โทรศัพท์ติดต่อคุณบาสโดยตรง</span>
+                            <span class="text-lg font-bold text-white">08X-XXX-XXXX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Alert Notification container for copying Line ID -->
+                <div id="copyAlert" class="hidden mt-4 p-3 bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-sm rounded-xl text-center">
+                    คัดลอก LINE ID เรียบร้อยแล้ว! สามารถนำไปวางเพื่อเพิ่มเพื่อนได้ทันที
+                </div>
+            </div>
+
+            <!-- Right Side: QR Code -->
+            <div class="flex flex-col items-center justify-center bg-brand-cardBg border border-brand-border rounded-3xl p-10 text-center shadow-xl">
+                <h3 class="text-xl font-bold text-white mb-2">สแกน QR Code เพื่อประเมินราคา</h3>
+                <p class="text-xs text-slate-400 mb-6">เปิดกล้องมือถือสแกน แอดไลน์รับราคาที่ดีที่สุดได้ทันที 24 ชม.</p>
+                
+                <!-- Premium Custom Simulated QR Code Art using SVG -->
+                <div class="w-64 h-64 bg-white p-4 rounded-2xl flex flex-col items-center justify-center shadow-inner relative border border-slate-200">
+                    <svg viewBox="0 0 100 100" class="w-full h-full text-slate-900">
+                        <rect x="5" y="5" width="25" height="25" fill="currentColor" />
+                        <rect x="8" y="8" width="19" height="19" fill="white" />
+                        <rect x="11" y="11" width="13" height="13" fill="currentColor" />
+                        
+                        <rect x="70" y="5" width="25" height="25" fill="currentColor" />
+                        <rect x="73" y="8" width="19" height="19" fill="white" />
+                        <rect x="76" y="11" width="13" height="13" fill="currentColor" />
+                        
+                        <rect x="5" y="70" width="25" height="25" fill="currentColor" />
+                        <rect x="8" y="73" width="19" height="19" fill="white" />
+                        <rect x="11" y="76" width="13" height="13" fill="currentColor" />
+
+                        <rect x="35" y="5" width="5" height="25" fill="currentColor" />
+                        <rect x="45" y="15" width="15" height="5" fill="currentColor" />
+                        <rect x="5" y="35" width="25" height="5" fill="currentColor" />
+                        <rect x="35" y="45" width="15" height="15" fill="currentColor" />
+                        <rect x="55" y="35" width="10" height="25" fill="currentColor" />
+                        <rect x="70" y="35" width="25" height="5" fill="currentColor" />
+                        <rect x="35" y="70" width="5" height="25" fill="currentColor" />
+                        <rect x="45" y="75" width="15" height="10" fill="currentColor" />
+                        <rect x="70" y="70" width="25" height="25" fill="currentColor" />
+                        <rect x="75" y="75" width="15" height="15" fill="white" />
+                        
+                        <!-- Mini Logo Center -->
+                        <rect x="42" y="42" width="16" height="16" fill="white" />
+                        <path d="M45,45 L55,45 L55,55 L45,55 Z" fill="#06c755" />
+                    </svg>
+                    <!-- Floating Brand Icon over QR -->
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div class="bg-white p-1 rounded-lg shadow-md">
+                            <i class="fa-brands fa-line text-brand-lineGreen text-3xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 w-full">
+                    <a href="https://line.me/R/ti/p/@CarCashBas" target="_blank" class="inline-flex items-center gap-2 bg-brand-lineGreen hover:bg-opacity-90 text-white px-6 py-3 rounded-xl font-bold transition-all w-full justify-center" style="min-height: 48px;">
+                        <i class="fa-brands fa-line text-xl"></i> กดแอดไลน์ด่วน (แชทคุยตรง)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-darkBg border-t border-brand-border py-12">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-brand-gold rounded-lg flex items-center justify-center text-brand-darkBg font-black text-sm font-num">
+                    CC
+                </div>
+                <div>
+                    <span class="font-bold text-sm tracking-wide block">CarCash</span>
+                    <span class="text-[10px] text-slate-500 block">© 2026 CarCash บาส. All Rights Reserved.</span>
+                </div>
+            </div>
+            
+            <div class="text-xs text-slate-500 text-center md:text-right">
+                <p>งบประมาณระบบ: 444 บาท/ปี (ค่า LINE Premium ID เลี่ยงชื่อค้นหายาก / ส่วนหน้าเว็บโฮสต์ฟรี GitHub Pages)</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // Toggle mobile navigation drawer/dropdown
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                // Change menu icon to "X" (Close)
+                menuIcon.className = "fa-solid fa-xmark text-2xl";
+            } else {
+                mobileMenu.classList.add('hidden');
+                // Change menu icon back to "Bars" (Hamburger)
+                menuIcon.className = "fa-solid fa-bars text-2xl";
+            }
+        }
+
+        // Custom copy clipboard logic using document.execCommand (Safe in frames)
+        function copyLineId() {
+            const lineText = document.getElementById('lineIdText').innerText;
+            const tempInput = document.createElement('input');
+            tempInput.value = lineText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            // Show custom success notice inside view (No alert window!)
+            const alertBox = document.getElementById('copyAlert');
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Interactive Car Valuation Generator
+        function calculateValuation() {
+            const brand = document.getElementById('carBrand').value;
+            const year = document.getElementById('carYear').value;
+            const model = document.getElementById('carModel').value.trim() || 'รุ่นทั่วไป';
+            const condition = document.getElementById('carCondition').value;
+
+            // Basic Dynamic algorithm to simulate valuation
+            let basePrice = 500000;
+            
+            if (brand === 'Toyota' || brand === 'Honda' || brand === 'Isuzu') {
+                basePrice = 480000;
+            } else if (brand === 'Mercedes-Benz' || brand === 'BMW') {
+                basePrice = 1350000;
+            } else {
+                basePrice = 350000;
+            }
+
+            // Adjustment by condition
+            if (condition.includes('ดีเยี่ยม')) {
+                basePrice = basePrice * 1.12;
+            } else if (condition.includes('ปานกลาง')) {
+                basePrice = basePrice * 0.85;
+            }
+
+            // Calculate range output for user
+            const resultBox = document.getElementById('resultBox');
+            const valText = document.getElementById('estimatedValueText');
+            resultBox.classList.remove('hidden');
+            
+            const minPrice = Math.round(basePrice * 0.92 / 10000) * 10000;
+            const maxPrice = Math.round(basePrice * 1.08 / 10000) * 10000;
+            valText.innerText = `${minPrice.toLocaleString('th-TH')} - ${maxPrice.toLocaleString('th-TH')} ฿`;
+
+            // Prepare Line Template Message (High Conversion)
+            const messageText = `สวัสดีครับคุณบาส ผมประเมินราคาหน้าเว็บบนมือถือมา สนใจขายรถยนต์:\n- ยี่ห้อ: ${brand}\n- รุ่นย่อย: ${model}\n- ปีจดทะเบียน: ${year}\n- สภาพเบื้องต้น: ${condition}\nรบกวนคุณบาสติดต่อกลับเพื่อประเมินราคาและคุยรายละเอียดด้วยครับ!`;
+            
+            const lineId = 'CarCashBas'; 
+            const encodedText = encodeURIComponent(messageText);
+            const lineUrl = `https://line.me/R/ti/p/@${lineId}?text=${encodedText}`;
+
+            // Reveal and bind Line Submit Button
+            const submitBtn = document.getElementById('lineSubmitBtn');
+            submitBtn.href = lineUrl;
+            submitBtn.classList.remove('hidden');
+            
+            // Auto smooth scroll to button focus area
+            submitBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
